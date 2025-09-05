@@ -1,0 +1,86 @@
+:root{
+  --bg1: #ffecd2;
+  --bg2: #fcb69f;
+  --panel: #fff;
+  --accent: #ff6b6b;
+  --tile-size: min(9.5vw, 56px);
+  --gap: 6px;
+  --radius: 12px;
+  --shadow: 0 8px 28px rgba(10,10,10,0.12);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+body{
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  padding:18px;
+}
+
+/* App */
+.app{
+  width:min(100%,980px); max-width:980px;
+  display:flex; flex-direction:column; gap:14px; align-items:center;
+}
+
+/* HUD */
+.hud{ display:flex; justify-content:space-between; align-items:center; width:100%}
+.title{ font-weight:800; font-size:clamp(20px,3.6vw,28px); color:#3b2d2d}
+.stats{ display:flex; gap:12px }
+.stat{ background:var(--panel); padding:8px 12px; border-radius:10px; box-shadow:var(--shadow); text-align:center; min-width:84px }
+.stat .label{ font-size:11px; color:#6b6b6b; text-transform:uppercase; letter-spacing:.8px }
+.stat div#score, .stat div#moves{ font-weight:700; font-size:18px; color:#222 }
+
+/* Board */
+.board-wrap{ background:rgba(255,255,255,0.7); padding:14px; border-radius:16px; box-shadow:var(--shadow) }
+.board{
+  display:grid;
+  grid-template-columns: repeat(8, var(--tile-size));
+  grid-auto-rows: var(--tile-size);
+  gap: var(--gap);
+  touch-action: manipulation;
+  width: calc(8 * var(--tile-size) + 7 * var(--gap));
+}
+
+/* Tile */
+.tile{
+  width:100%; height:100%;
+  border-radius:10px; display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:clamp(14px,3vw,20px); color:white; user-select:none;
+  transform: translateZ(0);
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), opacity .18s linear;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12), inset 0 -6px 12px rgba(255,255,255,0.08);
+}
+
+/* tile colors */
+.tile.type-0{ background: #ff6b6b } /* red */
+.tile.type-1{ background: #ffd93d } /* yellow */
+.tile.type-2{ background: #6bcB77 } /* green */
+.tile.type-3{ background: #4d96ff } /* blue */
+.tile.type-4{ background: #b38cff } /* purple */
+.tile.type-5{ background: #ff8fa3 } /* pink */
+
+/* swap highlight */
+.tile.selected{ outline: 3px solid rgba(255,255,255,0.28); transform:scale(1.06) }
+
+/* removed animation */
+.tile.removing{ animation: popOut .28s ease forwards }
+@keyframes popOut { to { transform: scale(.2) rotate(20deg); opacity:0 } }
+
+/* Controls */
+.controls{ display:flex; gap:12px }
+.controls button{ padding:10px 14px; border-radius:10px; border:none; background:#3b2d2d; color:#fff; cursor:pointer }
+
+/* overlay */
+.overlay{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(2,6,23,0.6); z-index:80 }
+.overlay.hidden{ display:none }
+.overlay-card{ background:var(--panel); padding:26px; border-radius:14px; text-align:center; min-width:260px; box-shadow:var(--shadow) }
+.overlay-card h2{ margin:0 0 6px; font-size:1.4rem }
+.overlay-card p{ margin:0 0 12px; color:#444 }
+.overlay-card button{ padding:10px 14px; border-radius:10px; border:none; background:var(--accent); color:#fff; cursor:pointer }
+
+/* responsive adjustments */
+@media (max-width:420px){
+  :root{ --tile-size: min(12vw, 44px) }
+  .board{ gap:5px }
+}

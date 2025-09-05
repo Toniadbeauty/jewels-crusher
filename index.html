@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Match 3 — Starter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hud">
+      <div class="title">SweetSwap</div>
+      <div class="stats">
+        <div class="stat"><div class="label">Score</div><div id="score">0</div></div>
+        <div class="stat"><div class="label">Moves</div><div id="moves">30</div></div>
+      </div>
+    </header>
+
+    <section class="board-wrap">
+      <div id="board" class="board" aria-label="Match three board" role="grid"></div>
+    </section>
+
+    <div class="controls">
+      <button id="shuffBtn">Shuffle</button>
+      <button id="restartBtn">Restart</button>
+    </div>
+  </main>
+
+  <!-- overlays -->
+  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-card">
+      <h2 id="overlayTitle">You Win!</h2>
+      <p id="overlayMsg">Score: 0</p>
+      <div class="overlay-actions">
+        <button id="playAgain">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
